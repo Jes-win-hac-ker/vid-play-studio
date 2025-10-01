@@ -30,6 +30,21 @@ jobs:
     - name: Build
       run: bun run build
 
+    - name: Enable Pages via PAT (optional)
+      env:
+        PAGES_PAT: ${{ secrets.PAGES_PAT }}
+        REPO_FULL: ${{ github.repository }}
+      run: |
+        if [ -z "$PAGES_PAT" ]; then
+          echo "PAGES_PAT not set — skipping PAT-based Pages enablement"
+          exit 0
+        fi
+        echo "Enabling GitHub Pages via REST API using provided PAT..."
+        repo_full="$REPO_FULL"
+        api_url="https://api.github.com/repos/${repo_full}/pages"
+        body='{"source":{"branch":"main","path":"/"}}'
+        curl -sS -X POST -H "Authorization: token $PAGES_PAT" -H "Accept: application/vnd.github+json" -d "$body" "$api_url" || true
+
     - name: Setup Pages
       uses: actions/configure-pages@v4
       with:
