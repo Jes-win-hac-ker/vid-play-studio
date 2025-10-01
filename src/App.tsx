@@ -42,7 +42,10 @@ const App = () => {
               flexGrow: 1,
               p: 3,
               mt: 8,
-              ml: { xs: 0, md: '240px' },
+              // Rely on the permanent Drawer occupying width in the flex layout on md+.
+              // Removing the hardcoded left margin prevents double offset and ensures
+              // full-width content when the sidebar is hidden on small screens.
+              ml: 0,
               minHeight: 'calc(100vh - 64px)',
             }}
           >
