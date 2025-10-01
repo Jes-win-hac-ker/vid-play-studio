@@ -20,7 +20,7 @@ const App = () => {
 
   return (
     <ThemeProvider>
-      <BrowserRouter>
+      <BrowserRouter basename="/vid-play-studio">
         <Box sx={{ display: 'flex', minHeight: '100vh' }}>
           <AppBarComponent onMenuClick={handleMenuClick} />
           
