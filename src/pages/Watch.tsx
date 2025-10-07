@@ -19,6 +19,21 @@ export const Watch = () => {
   const [commentText, setCommentText] = useState('');
   const [showFullDescription, setShowFullDescription] = useState(false);
 
+  // Map mock video IDs to real YouTube video IDs for demo purposes
+  const getYouTubeVideoId = (mockId: string) => {
+    const videoMapping: { [key: string]: string } = {
+      'v1': 'dQw4w9WgXcQ', // React tutorial placeholder
+      'v2': 'Tn6-PIqc4UM', // Material-UI tutorial placeholder
+      'v3': 'TgqeRTwZvLo', // JavaScript ES6+ placeholder
+      'v4': 'SqcY0GlETPk', // CSS Grid vs Flexbox placeholder
+      'v5': 'RNxfKYaTIcc', // React Hooks placeholder
+      'v6': 'x0uinJvhNxI', // Web Performance placeholder
+      'v7': 'TaX2VRCCJnY', // TypeScript placeholder
+      'v8': 'YUzxpZheOdE'  // Responsive Design placeholder
+    };
+    return videoMapping[mockId] || 'dQw4w9WgXcQ'; // fallback video
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       if (!videoId) return;
@@ -86,7 +101,7 @@ export const Watch = () => {
               height: '100%',
               border: 'none',
             }}
-            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+            src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoId || '')}`}
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
